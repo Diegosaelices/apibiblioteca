@@ -2,12 +2,9 @@ package com.example.apibiblioteca.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.util.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Getter
 @Setter
@@ -26,7 +23,7 @@ public class Autor {
     private String nombre;
 
     @ManyToMany(mappedBy = "autores")
+    @JsonIgnoreProperties("autores")  // 👈 Esto rompe el ciclo de serialización
     private Set<Libro> libros = new HashSet<>();
-
-
 }
+

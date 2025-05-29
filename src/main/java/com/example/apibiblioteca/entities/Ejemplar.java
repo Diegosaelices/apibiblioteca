@@ -2,10 +2,8 @@ package com.example.apibiblioteca.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Getter
 @Setter
@@ -26,7 +24,7 @@ public class Ejemplar {
 
     @ManyToOne
     @JoinColumn(name = "libro_id", nullable = false)
+    @JsonIgnoreProperties("ejemplares") // 👈 Esta línea rompe el bucle de serialización
     private Libro libro;
-
-
 }
+

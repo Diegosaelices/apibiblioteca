@@ -20,10 +20,14 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     List<Libro> findByFechaPublicacion(LocalDate fecha);
 
 
-    // Número de ejemplares por libro
+    // Número de ejemplares por libro usando un @query
     @Query("SELECT new com.example.apibiblioteca.dto.LibroYNumEjemplaresDTO(" +
             "l.id, l.titulo, l.isbn, l.fechaPublicacion, COUNT(e)) " +
             "FROM Libro l LEFT JOIN l.ejemplares e " +
             "GROUP BY l.id, l.titulo, l.isbn, l.fechaPublicacion")
     List<LibroYNumEjemplaresDTO> obtenerResumenLibros();
+
+    //Buscar por autor ignorando mayusculas
+    List<Libro> findByAutoresNombreContainingIgnoreCase(String nombre);
+
 }

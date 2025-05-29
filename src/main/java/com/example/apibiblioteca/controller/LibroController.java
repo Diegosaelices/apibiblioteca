@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/libros")
 public class LibroController {
@@ -74,4 +75,9 @@ public class LibroController {
     public ResponseEntity<Libro> eliminarEjemplar(@PathVariable Long libroId, @PathVariable Long ejemplarId) {
         return ResponseEntity.ok(libroService.eliminarEjemplar(libroId, ejemplarId));
     }
+    @GetMapping("/porAutor")
+    public ResponseEntity<List<Libro>> buscarPorAutor(@RequestParam String nombre) {
+        return ResponseEntity.ok(libroService.buscarPorNombreAutor(nombre));
+    }
+
 }

@@ -56,6 +56,7 @@ public class LibroService {
     }
 
     public List<Libro> buscarPorFecha(LocalDate fecha) {
+
         return libroRepositorio.findByFechaPublicacion(fecha);
     }
 
@@ -90,4 +91,9 @@ public class LibroService {
         ejemplarRepositorio.delete(ejemplar);
         return libroRepositorio.save(libro);
     }
+
+    public List<Libro> buscarPorNombreAutor(String nombre) {
+        return libroRepositorio.findByAutoresNombreContainingIgnoreCase(nombre);
+    }
+
 }

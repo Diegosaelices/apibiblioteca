@@ -1,14 +1,12 @@
 package com.example.apibiblioteca.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Setter
@@ -41,15 +39,16 @@ public class Libro {
             joinColumns = @JoinColumn(name = "libro_id"),
             inverseJoinColumns = @JoinColumn(name = "autor_id")
     )
+    @JsonIgnoreProperties("libros")
     private Set<Autor> autores = new HashSet<>();
 
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("libro")
     private List<Ejemplar> ejemplares = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
         this.fechaCreacion = LocalDateTime.now();
     }
-
-
 }
+
