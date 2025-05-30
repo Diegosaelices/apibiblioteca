@@ -23,7 +23,7 @@ public class Autor {
     private String nombre;
 
     @ManyToMany(mappedBy = "autores")
-    @JsonIgnoreProperties("autores")  // 👈 Esto rompe el ciclo de serialización
+    @JsonIgnoreProperties("autores")
     private Set<Libro> libros = new HashSet<>();
 }
 

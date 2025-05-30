@@ -24,7 +24,7 @@ public class Ejemplar {
 
     @ManyToOne
     @JoinColumn(name = "libro_id", nullable = false)
-    @JsonIgnoreProperties("ejemplares") // 👈 Esta línea rompe el bucle de serialización
+    @JsonIgnoreProperties("ejemplares")
     private Libro libro;
 }
 
